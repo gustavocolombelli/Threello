@@ -10,8 +10,14 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-$this->group(['middleware' => ['auth'], 'namespace' => 'Admin'], function(){
-	$this->get('admin', 'AdminController@index')->name('admin.home');
+$this->group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'admin'], function(){
+	$this->get('sacar', 'BalanceController@sacar')->name('balance.sacar');
+
+	$this->post('deposit', 'BalanceController@depositStore')->name('deposit.store');
+	$this->get('deposit', 'BalanceController@deposit')->name('balance.deposit');
+	
+	$this->get('balance', 'BalanceController@index')->name('admin.balance');
+	$this->get('/', 'AdminController@index')->name('admin.home');
 });
 
 Route::get('/', 'Site\SiteController@index')->name('home');

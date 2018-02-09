@@ -182,7 +182,19 @@ return [
             'icon' => 'check',
             'icon_color' => 'green',
         ],
+        'FINANCEIRO',
+        [
+            'text' => 'Saldo',
+            'url'  => 'admin/balance',
+            'icon' => 'credit-card-alt',
+        ],
+        [
+            'text' => 'Histórico',
+            'url'  => 'admin/historic',
+            'icon' => 'history',
+        ],
     ],
+
 
     /*
     |--------------------------------------------------------------------------
