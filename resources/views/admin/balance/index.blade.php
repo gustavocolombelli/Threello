@@ -16,8 +16,8 @@
     	
 
 
-    		<div class="col-lg-3 col-xs-6">
-
+        <div class="col-lg-3 col-xs-6">
+          @include('admin.includes.messages')
           		<!-- small box -->
 	          <div class="small-box bg-green">
 
@@ -33,7 +33,10 @@
 	          </div>
                 <div class='box=header'>
                       <a href="{{ route('balance.deposit') }}" class="btn btn-primary"><i class="fa fa-cart-plus"></i> Recarregar</a>   
+                  @if($amount > 0)
                       <a href="{{ route('balance.sacar') }}" class="btn btn-danger"><i class="fa fa-credit-card"></i> Sacar</a> 
+                  @endif
+                  
                 </div>
 
                 <div class="box-body">

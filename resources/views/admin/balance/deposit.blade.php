@@ -20,6 +20,8 @@
     		<h3>Fazer Recarga</h3>
     	</div>
 
+        @include('admin.includes.messages')
+
     	<div class="box-body">
     		<form method="POST" action="{{ route('deposit.store') }}">
     			{!! csrf_field()!!}

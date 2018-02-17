@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Balance;
+use App\Http\Requests\MoneyValidationFormRequest;
 
 class BalanceController extends Controller
 {
@@ -21,13 +22,43 @@ class BalanceController extends Controller
     	return view('admin.balance.deposit');
     }
 
-    public function depositStore(Request $request, Balance $balance)
+    public function depositStore(MoneyValidationFormRequest $request)
     {
-     	//$balance->deposit($request->valorRecarga);
+     	
         $balance = auth()->user()->balance()->firstOrCreate([]);
-        dd($balance->deposit($request->valorRecarga));
+        $response = $balance->deposit($request->valorRecarga);
+
+        if ( $response['success']) {
+            return redirect()
+                            ->route('admin.balance')
+                            ->with('success', $response['message']);
+        }
+        else{
+            return redirect()
+                            ->back()
+                            ->with('error', $response['message']);
+        }
+
     }
+
     public function sacar(){
     	return view('admin.balance.sacar');
+    }
+
+    public function sacarStore(MoneyValidationFormRequest $request){
+        dd($request->all());
+        $balance = auth()->user()->balance()->firstOrCreate([]);
+        $response = $balance->deposit($request->valorRecarga);
+
+        if ( $response['success']) {
+            return redirect()
+                            ->route('admin.sacar')
+                            ->with('success', $response['message']);
+        }
+        else{
+            return redirect()
+                            ->back()
+                            ->with('error', $response['message']);
+        }
     }
 }
